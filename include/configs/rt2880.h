@@ -28,13 +28,13 @@
 #ifndef __CONFIG_H
 #define __CONFIG_H
 
-#define CFG_PROMPT "VoCore2 > "
+#define CFG_PROMPT "SuperSweet > "
 
 #define CONFIG_BOOTDELAY	10	/* autoboot after 10 seconds	*/
 
 #define CONFIG_NET_MULTI
 
-#define CONFIG_WEBGPIO 38
+#define CONFIG_WEBGPIO 40
 
 #define CONFIG_LED 44
 
@@ -49,8 +49,6 @@
 #define CONFIG_ETHADDR "00:AA:BB:CC:DD:10"
 
 #define SERIAL_CLOCK_DIVISOR 16
-
-#define CONFIG_WEBGPIO 46
 
 #define CONFIG_GPIOENABLED yes
 

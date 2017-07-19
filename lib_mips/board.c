@@ -975,10 +975,16 @@ int reset_button_enable(){
 		ra_or(GPIO_SYSCTL + GPIO1_MODE,(0x00000001 << 14) );
 		ra_and(GPIO_REG + GPIO_DIR_1, ~(0x0001 << 6) );
 		ra_or(GPIO_REG + GPIO_POL_1, (0x0001 << 6) );
+	/* set gpio 40 as input with inverted polarity*/
+	}else if (webgpio == 40){
+		ra_or(GPIO_SYSCTL + GPIO2_MODE,(0x00000001 << 8) );
+		ra_and(GPIO_REG + GPIO_DIR_1, ~(0x0001 << 8) );
+		ra_or(GPIO_REG + GPIO_POL_1, (0x0001 << 8) );
 	/* set gpio 46 as input with inverted polarity*/
 	}else if (webgpio == 46){
 		ra_and(GPIO_SYSCTL + GPIO1_MODE,~(0x00000003<<24) );
 		ra_or(GPIO_SYSCTL + GPIO1_MODE,(0x00000001 << 24) );
+		// TODO: These look incorrrect:
 		ra_and(GPIO_REG + GPIO_DIR_1, ~(0x0001 << 6) );
 		ra_or(GPIO_REG + GPIO_POL_1, (0x0001 << 6) );
 	}
@@ -994,6 +1000,15 @@ int reset_button_status(){
 		}else{
 			return 0;
 		}			
+	}
+	else if (webgpio == 40){
+	/* read gpio 40 */
+		reg = ra_inl( (GPIO_REG + GPIO_DATA_1) );
+		if ( reg & (0x0001 << 8) ){
+			return 1;
+		}else{
+			return 0;
+		}
 	}else if (webgpio == 46){
 	/* read gpio 46 */
 		reg = ra_inl( (GPIO_REG + GPIO_DATA_1) );
